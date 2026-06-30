@@ -4,6 +4,7 @@ import { DatabaseModule } from "./database/database.module";
 import { HealthModule } from "./health/health.module";
 import { UsuarioModule } from "./usuario/usuario.module";
 import { ChatModule } from "./chat/chat.module";
+import { ChatParticipanteModule } from "./chat_participante/chat-participante.module";
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ChatModule } from "./chat/chat.module";
     HealthModule,
     UsuarioModule,
     ChatModule,
+    ChatParticipanteModule,
   ],
 })
 export class AppModule {}
