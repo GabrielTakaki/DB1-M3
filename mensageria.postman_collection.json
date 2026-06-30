@@ -1,0 +1,539 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Mensageria API",
+		"description": "Coleção completa de endpoints do sistema de mensageria (Usuário, Chat, Chat_Participante, Mensagem)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000",
+			"type": "default"
+		},
+		{
+			"key": "usuarioId",
+			"value": "",
+			"type": "any"
+		},
+		{
+			"key": "usuario2Id",
+			"value": "",
+			"type": "any"
+		},
+		{
+			"key": "chatId",
+			"value": "",
+			"type": "any"
+		},
+		{
+			"key": "mensagemId",
+			"value": "",
+			"type": "any"
+		}
+	],
+	"item": [
+		{
+			"name": "Health",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": ["{{baseUrl}}"],
+							"path": ["health"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Criar Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const responseJson = pm.response.json();",
+									"    pm.collectionVariables.set('usuarioId', responseJson.id);",
+									"    console.log('Usuario ID salvo:', responseJson.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"telefone\": \"+5511987654321\",\n  \"nome_exibicao\": \"João Silva\",\n  \"status_recado\": \"Disponível\",\n  \"foto_url\": \"https://exemplo.com/foto1.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuario",
+							"host": ["{{baseUrl}}"],
+							"path": ["usuario"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Usuario 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const responseJson = pm.response.json();",
+									"    pm.collectionVariables.set('usuario2Id', responseJson.id);",
+									"    console.log('Usuario 2 ID salvo:', responseJson.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"telefone\": \"+5511912345678\",\n  \"nome_exibicao\": \"Maria Santos\",\n  \"status_recado\": \"Ocupada\",\n  \"foto_url\": \"https://exemplo.com/foto2.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuario",
+							"host": ["{{baseUrl}}"],
+							"path": ["usuario"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuario",
+							"host": ["{{baseUrl}}"],
+							"path": ["usuario"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuario por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuario/{{usuarioId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["usuario", "{{usuarioId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuario",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome_exibicao\": \"João Silva Atualizado\",\n  \"status_recado\": \"Ausente\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/usuario/{{usuarioId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["usuario", "{{usuarioId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/usuario/{{usuarioId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["usuario", "{{usuarioId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Criar Chat",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const responseJson = pm.response.json();",
+									"    pm.collectionVariables.set('chatId', responseJson.id);",
+									"    console.log('Chat ID salvo:', responseJson.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tipo\": \"grupo\",\n  \"nome\": \"Equipe de Desenvolvimento\",\n  \"descricao\": \"Chat da equipe de devs\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/chat",
+							"host": ["{{baseUrl}}"],
+							"path": ["chat"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todos Chats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/chat",
+							"host": ["{{baseUrl}}"],
+							"path": ["chat"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Chat por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/chat/{{chatId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["chat", "{{chatId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Chat",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Equipe de Desenvolvimento - Atualizado\",\n  \"descricao\": \"Chat principal da equipe\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/chat/{{chatId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["chat", "{{chatId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Chat",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/chat/{{chatId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["chat", "{{chatId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat_Participante",
+			"item": [
+				{
+					"name": "Adicionar Participante (Usuario 1)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usuario_id\": {{usuarioId}},\n  \"papel\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/chats/{{chatId}}/participantes",
+							"host": ["{{baseUrl}}"],
+							"path": ["chats", "{{chatId}}", "participantes"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar Participante (Usuario 2)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"usuario_id\": {{usuario2Id}},\n  \"papel\": \"membro\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/chats/{{chatId}}/participantes",
+							"host": ["{{baseUrl}}"],
+							"path": ["chats", "{{chatId}}", "participantes"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Participantes do Chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/chats/{{chatId}}/participantes",
+							"host": ["{{baseUrl}}"],
+							"path": ["chats", "{{chatId}}", "participantes"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Participante",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"papel\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/chats/{{chatId}}/participantes/{{usuario2Id}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["chats", "{{chatId}}", "participantes", "{{usuario2Id}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Participante",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/chats/{{chatId}}/participantes/{{usuario2Id}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["chats", "{{chatId}}", "participantes", "{{usuario2Id}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mensagem",
+			"item": [
+				{
+					"name": "Criar Mensagem",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const responseJson = pm.response.json();",
+									"    pm.collectionVariables.set('mensagemId', responseJson.id);",
+									"    console.log('Mensagem ID salvo:', responseJson.id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"chat_id\": {{chatId}},\n  \"remetente_id\": {{usuarioId}},\n  \"conteudo\": \"Olá pessoal! Primeira mensagem no grupo.\",\n  \"tipo_conteudo\": \"texto\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mensagens",
+							"host": ["{{baseUrl}}"],
+							"path": ["mensagens"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Mensagem (Usuario 2)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"chat_id\": {{chatId}},\n  \"remetente_id\": {{usuario2Id}},\n  \"conteudo\": \"Oi! Bem-vindo ao grupo!\",\n  \"tipo_conteudo\": \"texto\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mensagens",
+							"host": ["{{baseUrl}}"],
+							"path": ["mensagens"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Todas Mensagens",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/mensagens",
+							"host": ["{{baseUrl}}"],
+							"path": ["mensagens"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Mensagens por Chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/mensagens?chatId={{chatId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["mensagens"],
+							"query": [
+								{
+									"key": "chatId",
+									"value": "{{chatId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Mensagem por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/mensagens/{{mensagemId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["mensagens", "{{mensagemId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Mensagem",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"conteudo\": \"Olá pessoal! Mensagem editada.\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/mensagens/{{mensagemId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["mensagens", "{{mensagemId}}"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remover Mensagem",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/mensagens/{{mensagemId}}",
+							"host": ["{{baseUrl}}"],
+							"path": ["mensagens", "{{mensagemId}}"]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

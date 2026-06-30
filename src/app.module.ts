@@ -5,6 +5,7 @@ import { HealthModule } from "./health/health.module";
 import { UsuarioModule } from "./usuario/usuario.module";
 import { ChatModule } from "./chat/chat.module";
 import { ChatParticipanteModule } from "./chat_participante/chat-participante.module";
+import { MensagemModule } from "./mensagem/mensagem.module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ChatParticipanteModule } from "./chat_participante/chat-participante.mo
     UsuarioModule,
     ChatModule,
     ChatParticipanteModule,
+    MensagemModule,
   ],
 })
 export class AppModule {}
