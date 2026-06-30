@@ -31,7 +31,7 @@ export class UsuarioController {
     return this.usuarioService.findAll();
   }
 
-  @Patch("id")
+  @Patch(":id")
   update(
     @Param("id", ParseIntPipe) id: number,
     @Body() dto: UpdateUsuarioDTO
