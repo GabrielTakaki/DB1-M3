@@ -15,6 +15,7 @@ API REST desenvolvida em NestJS para gerenciamento de um sistema de mensageria c
 - **MySQL 8.x** (Banco de dados)
 - **mysql2** (Driver MySQL)
 - **class-validator** e **class-transformer** (Validação de DTOs)
+- **Docker** (Conteirização) - foi usado para maior facilidade na criação do banco de dados
 
 ## 📦 Pré-requisitos
 
@@ -23,6 +24,7 @@ Antes de começar, certifique-se de ter instalado:
 - **Node.js** versão 18.x ou superior ([Download](https://nodejs.org/))
 - **MySQL** versão 8.x ([Download](https://dev.mysql.com/downloads/mysql/))
 - **npm** (geralmente vem com Node.js)
+- **Docker** (Nao obrigatorio)
 
 ## Como Rodar o Projeto
 
@@ -74,11 +76,9 @@ npm install
 
 ### Iniciar a Aplicação
 ```bash
-# Modo de desenvolvimento (com hot-reload)
+# Modo de desenvolvimento
 npm run start:dev
 
-# Modo de produção
-npm run start:prod
 ```
 
 A API estará disponível em: **`http://localhost:3000`**
@@ -266,9 +266,14 @@ Todas as requisições possuem validação de dados através de **DTOs** (Data T
 - O arquivo `.env.example` serve como template para configuração
 - Certifique-se de que o MySQL está rodando antes de iniciar a aplicação
 - A API usa a porta 3000 por padrão (configurável via `PORT` no `.env`)
+- Caso utilize da ferramente Docker, basta utilizar o comando para criar um banco:
+```bash
+# Container do banco de dados MySql
+docker compose up -d
+```
 
 ## 👨‍💻 Desenvolvido por
-> Gabriel Junkes Takaki e Nycolas Alberto Darosci
+**Gabriel Junkes Takaki e Nycolas Alberto Darosci**
 
 Trabalho acadêmico - Banco de Dados I
 Universidade do Vale do Itajai
